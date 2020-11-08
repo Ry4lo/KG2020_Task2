@@ -27,24 +27,22 @@ public class WuLineDrawer implements LineDrawer {
         float gradient;
         if (Math.abs(dy) >= Math.abs(dx)) {
             if (y2 < y1) {
-            x1 += x2;
-            x2 = x1 - x2;
-            x1 -= x2;
-            y1 += y2;
-            y2 = y1 - y2;
-            y1 -= y2;
-        }
-            System.out.println(dy);
+                x1 += x2;
+                x2 = x1 - x2;
+                x1 -= x2;
+                y1 += y2;
+                y2 = y1 - y2;
+                y1 -= y2;
+            }
             gradient = (float) dx / dy;
             float interx = x1 + gradient;
-            pd.setPixel(x1, y1, c);
             for (int y = y1; y < y2; ++y) {
-                pd.setPixel((int) interx, y, new Color(110, 30, 170, (int) (255 - fractionalPart(interx) * 255)));
-                pd.setPixel((int) interx + 1, y, new Color(110, 30, 170, (int) (fractionalPart(interx) * 255)));
+                pd.setPixel((int) interx - 1, y, new Color(110, 30, 170, (int) (255 - fractionalPart(interx) * 255)));
+                pd.setPixel((int) interx, y, new Color(110, 30, 170, (int) (fractionalPart(interx) * 255)));
                 interx += gradient;
             }
         } else {
-            if (x2 < x1) {
+            if (x2 <= x1) {
                 x1 += x2;
                 x2 = x1 - x2;
                 x1 -= x2;
@@ -54,13 +52,11 @@ public class WuLineDrawer implements LineDrawer {
             }
             gradient = (float) dy / dx;
             float intery = y1 + gradient;
-            pd.setPixel(x1, y1, c);
             for (int x = x1; x < x2; ++x) {
-                pd.setPixel(x, (int) intery, new Color(110, 30, 170, (int) (255 - fractionalPart(intery) * 255)));
-                pd.setPixel(x, (int) intery + 1, new Color(110, 30, 170, (int) (fractionalPart(intery) * 255)));
+                pd.setPixel(x, (int) intery - 1, new Color(110, 30, 170, (int) (255 - fractionalPart(intery) * 255)));
+                pd.setPixel(x, (int) intery, new Color(110, 30, 170, (int) (fractionalPart(intery) * 255)));
                 intery += gradient;
             }
         }
-
     }
 }
